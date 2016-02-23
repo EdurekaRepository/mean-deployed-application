@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+     <title>edureka! MEAN Application</title>     
+     <link href="/libs/css/bootstrap.min.css" rel="stylesheet"> 
+     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="shortcut icon" href="http://d30aa6afk7qd1v.cloudfront.net/imgver.5694333/img/favicon.ico" type="image/x-icon">
+     <script>
+  $(function() {
+    var datepicker=$("#datepicker").datepicker(
+                    {changeMonth:true,changeYear:true,maxDate:"-1M -1D -1Y",dateFormat:"yy-mm-dd"}
+                                              );
+    $("#datepicker").bind("keydown", function (event) {
+       event.preventDefault();
+     });
+  });
+  </script>
+    
+</head>
+
+<body>
+    <div class="container" ng-controller="AppCtrl">
+      <br/>
+      <h1 align="center">edureka! MEAN Application - Employee Directory App</h1><br/><br/>
+      <table class="table">          
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Date of Birth</td>
+            <td>Department</td>
+            <td>Gender</td>
+            <td>Age</td>
+          </tr>
+        </thead>
+          
+        <tbody>
+            <tr>
+                
+              <form>
+                  <td>
+                    <input class="form-control" ng-model="employee.name" required  placeholder="Name"/>
+                  </td>
+                  <td>
+                    <input type="email" ng-model="employee.email" required class="form-control"                                          placeholder="abc@xyz.com"/>
+                  </td>
+                  <td>
+                    <input type="text" ng-model="employee.dob" id="datepicker" class="form-control" required                                            placeholder="YYYY-MM-DD"/>
+                  </td>
+                  <td>
+                    <input  ng-model="employee.department" required class="form-control"                                        placeholder="Department"/>
+                  </td>
+                  <td>
+                    <input id="gender" ng-model="employee.gender" required class="form-control"                                          placeholder="Gender"/>
+                  </td>
+                  <td>
+                    <input type="number" ng-model="employee.age" disabled class="form-control"                                          placeholder="Age"/>
+                  </td>
+                  <td>
+                      <button class="btn btn-success btn-md" ng-click="addEmployee()">Add Employee</button>
+                      <td><button class="btn btn-success btn-md" ng-click="updateEmployee()">Update Employee</button></td>
+                  </td>
+            
+              </form>
+            </tr> 
+            
+            <tr ng-repeat="employee in employees">
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>               
+                <td>{{employee.dob | date:'yyyy-MM-dd'}}</td>
+                <td>{{employee.department}}</td>
+                <td>{{employee.gender}}</td>
+                <td>{{employee.age}}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" ng-click="removeEmployee(employee._id)">Delete</button>&nbsp;&nbsp;
+                  <button class="btn btn-primary btn-sm" ng-click="editEmployee(employee._id)">Edit</button>
+                </td>
+                
+            </tr> 
+            
+            
+          </tbody>
+          
+        </table>  
+    </div>
+
+     <script src="/libs/js/angular.min.js"></script>  
+     <script src="/controllers/controller.js"></script>
+</body>
+    
+</html>
+
+
